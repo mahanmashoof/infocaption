@@ -1,0 +1,12 @@
+.search-fields {
+  margin: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  text-align: center;
+  font-family: "Montserrat";
+  margin: 5rem;
+  font-size: 3rem;
+}
