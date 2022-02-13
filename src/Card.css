@@ -1,0 +1,35 @@
+.card-main {
+  font-family: "Montserrat", sans-serif;
+  margin: 3rem;
+  text-align: justify;
+  box-shadow: 10px 10px 20px #888888;
+  border-radius: 20px;
+}
+
+.title {
+  font-weight: 600;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 20px 20px 0 0;
+}
+
+.date {
+  font-weight: 100;
+  background-color: grey;
+  color: white;
+  padding: 1rem;
+}
+
+.content {
+  font-weight: 400;
+  padding: 1rem 2rem;
+  text-align: start;
+  line-height: 22px;
+}
+
+.author {
+  font-weight: 400;
+  background-color: antiquewhite;
+  padding: 1rem;
+  border-radius: 0 0 20px 20px;
+}

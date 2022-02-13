@@ -1,11 +1,12 @@
+import "./Card.css";
+
 const Card = (props) => {
   return (
-    <div>
-      <div>{props.name}</div>
-      <div>{props.publicationDate}</div>
-      <div>{props.content}</div>
-      <div>By: {props.firstLastName}</div>
-      <br />
+    <div className="card-main">
+      <div className="title">{props.name}</div>
+      <div className="date">{props.publicationDate}</div>
+      <div className="content">{props.content}</div>
+      <div className="author">By: {props.firstLastName}</div>
     </div>
   );
 };

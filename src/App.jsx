@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import Card from "./Card";
 
 function App() {
@@ -39,7 +38,11 @@ function App() {
             name={obj.name ?? `Title missing`}
             publicationDate={obj.publicationDate ?? `publication date missing`}
             content={obj.content ?? `NO CONENT`}
-            firstLastName={obj.FirstLastName ?? `Author N/A`}
+            firstLastName={
+              obj.FirstLastName || /\S/.test(obj.FirstLastName)
+                ? obj.FirstLastName
+                : `Author N/A`
+            }
           />
         ))}
     </div>
