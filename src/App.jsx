@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import "./App.css";
 
 function App() {
   const [hitsPerPage, setHitsPerPage] = useState(10);
   const [freeSearch, setFreeSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(0);
   const [objArr, setObjArr] = useState([]);
+  const firstPage = 1;
 
   const handleHitsPerPage = (e) => {
     setHitsPerPage(Number(e.target.value));
@@ -15,18 +18,33 @@ function App() {
     setFreeSearch(e.target.value);
   };
 
-  const url = `https://support.infocaption.com/API/lucene/guidesearch?hitsPerPage=${hitsPerPage}&searchQuery=${freeSearch}`;
+  const handleCurrentPage = (e) => {
+    setPage(e.target.innerHTML);
+  };
+
+  const handlePrevPage = () => {
+    setPage(Number(page) - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(Number(page) + 1);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [page]);
+
+  const url = `https://support.infocaption.com/API/lucene/guidesearch?hitsPerPage=${hitsPerPage}&searchQuery=${freeSearch}&page=${page}`;
 
   const handleSearch = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        setMaxPage(data.totalPages);
         setObjArr(data.results);
         console.log(data);
       });
   };
-
-  console.log(hitsPerPage);
 
   return (
     <div className="App">
@@ -64,12 +82,52 @@ function App() {
             publicationDate={obj.publicationDate ?? `publication date missing`}
             content={obj.content ?? `NO CONENT`}
             firstLastName={
-              obj.FirstLastName || /\S/.test(obj.FirstLastName)
+              obj.FirstLastName && /\S/.test(obj.FirstLastName)
                 ? obj.FirstLastName
-                : `Author N/A`
+                : `Author unknown`
             }
           />
         ))}
+      <div className="pagination-row">
+        {page > 1 && (
+          <button className="pagination-button" onClick={handlePrevPage}>
+            ⊲
+          </button>
+        )}
+        {page > 2 && (
+          <button className="pagination-button" onClick={handleCurrentPage}>
+            {firstPage}
+          </button>
+        )}
+        {page > 2 && <div className="pagination-dots">...</div>}
+        {page > 1 && (
+          <button className="pagination-button" onClick={handleCurrentPage}>
+            {Number(page) - 1}
+          </button>
+        )}
+        <button
+          className="pagination-button current"
+          onClick={handleCurrentPage}
+        >
+          {page}
+        </button>
+        {page < maxPage && (
+          <button className="pagination-button" onClick={handleCurrentPage}>
+            {Number(page) + 1}
+          </button>
+        )}
+        {page < maxPage - 1 && <div className="pagination-dots">...</div>}
+        {page < maxPage - 1 && (
+          <button className="pagination-button" onClick={handleCurrentPage}>
+            {maxPage}
+          </button>
+        )}
+        {page < maxPage && (
+          <button className="pagination-button" onClick={handleNextPage}>
+            ⊳
+          </button>
+        )}
+      </div>
     </div>
   );
 }
