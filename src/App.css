@@ -1,7 +1,13 @@
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .search-fields {
   margin: 1rem 3rem;
   display: flex;
   justify-content: space-between;
+  font-family: "Montserrat";
 }
 
 .heading {
@@ -39,4 +45,23 @@
   flex-direction: column;
   font-size: 1rem;
   letter-spacing: 5px;
+}
+
+.search-form {
+  width: 90%;
+}
+
+.search-field {
+  width: 100%;
+  height: 2rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  width: 2rem;
+  font-size: 20px;
+  margin: 0 25px 5px 0;
 }

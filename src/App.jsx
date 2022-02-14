@@ -50,29 +50,17 @@ function App() {
     <div className="App">
       <h1 className="heading">Guider</h1>
       <div className="search-fields">
-        <form>
+        <form className="search-form">
           <input
             type="text"
+            className="search-field"
             placeholder="Keywords"
             onChange={handleFreeSearch}
           />
         </form>
-        <form>
-          <label htmlFor="hits-select">Hits per page: </label>
-          <select
-            onChange={handleHitsPerPage}
-            defaultValue="10"
-            id="hits-select"
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-          </select>
-        </form>
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-button" onClick={handleSearch}>
+          🔍
+        </button>
       </div>
       {objArr.length > 0 &&
         objArr.map((obj, i) => (
@@ -88,6 +76,23 @@ function App() {
             }
           />
         ))}
+      <div className="search-fields">
+        <form>
+          <label htmlFor="hits-select">Views per page: </label>
+          <select
+            onChange={handleHitsPerPage}
+            defaultValue="10"
+            id="hits-select"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+          </select>
+        </form>
+      </div>
       <div className="pagination-row">
         {page > 1 && (
           <button className="pagination-button" onClick={handlePrevPage}>
