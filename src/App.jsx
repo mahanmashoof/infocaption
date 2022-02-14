@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     handleSearch();
-  }, [page]);
+  }, [page, hitsPerPage]);
 
   const url = `https://support.infocaption.com/API/lucene/guidesearch?hitsPerPage=${hitsPerPage}&searchQuery=${freeSearch}&page=${page}`;
 
