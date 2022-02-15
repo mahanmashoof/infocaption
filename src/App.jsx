@@ -30,21 +30,16 @@ function App() {
     setPage(Number(page) + 1);
   };
 
-  useEffect(() => {
-    handleSearch();
-  }, [page, hitsPerPage]);
-
   const url = `https://support.infocaption.com/API/lucene/guidesearch?hitsPerPage=${hitsPerPage}&searchQuery=${freeSearch}&page=${page}`;
 
-  const handleSearch = () => {
+  useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setMaxPage(data.totalPages);
         setObjArr(data.results);
-        console.log(data);
       });
-  };
+  }, [page, hitsPerPage, url]);
 
   return (
     <div className="App">
@@ -58,9 +53,6 @@ function App() {
             onChange={handleFreeSearch}
           />
         </form>
-        <button className="search-button" onClick={handleSearch}>
-          🔍
-        </button>
       </div>
       {objArr.length > 0 &&
         objArr.map((obj, i) => (
